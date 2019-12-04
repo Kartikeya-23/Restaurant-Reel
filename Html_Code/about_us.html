@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+        }
+
+        /*silde*/
+        #id1,
+        #id2,
+        #id3,
+        #id4,
+        #id5 {
+            display: none;
+        }
+
+        .imgcontainer {
+            background: linear-gradient(to bottom, #d1913c, #ffd194);
+            position: relative;
+            margin: 30px auto;
+            width: 100%;
+            padding-bottom: 37%;
+        }
+
+        .imgcontainer .img_slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .imgcontainer .img_slide img {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            width: 80%;
+            height: 100%;
+        }
+
+        .prev,
+        .next {
+            font-size: 60px;
+            width: 10%;
+            height: inherit;
+            position: absolute;
+            top: 0;
+            text-align: center;
+            cursor: pointer;
+            transition: .5s;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        .prev i,
+        .next i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .fa {
+            /*            color: white;*/
+            font-size: 50px;
+        }
+
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, .255);
+            color: white;
+            transition: .3s;
+        }
+
+        .nav-slider {
+            width: 100%;
+            bottom: 12%;
+            height: 12px;
+            position: absolute;
+            text-align: center;
+            z-index: 99;
+        }
+
+        .nav-slider .dots {
+            width: 18px;
+            height: 18px;
+            margin: 0 5px;
+            position: relative;
+            border-radius: 100%;
+            display: inline-block;
+            background: rgba(0, 0, 0, .5);
+            transition: .5s;
+        }
+
+        .nav-slider .dots:hover {
+            cursor: pointer;
+            background: rgba(255, 255, 255, .9);
+            transition: .25s;
+        }
+
+        .img_slide {
+            z-index: -1;
+        }
+
+        #id1:checked~#one,
+        #id2:checked~#two,
+        #id3:checked~#three,
+        #id4:checked~#four,
+        #id5:checked~#five {
+            z-index: 9;
+        }
+
+        /*        introduction*/
+
+        .introduction {
+            border: 1px solid darkgreen;
+            padding: 35px;
+            padding-bottom: 55px;
+            background: linear-gradient(to right, #0f2000, #203a00, #0f2000);
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .intro_heading h2 {
+            text-align: center;
+            color: lightgreen;
+            font-weight: 600;
+        }
+
+        .intro_content p {
+            margin: 20px auto;
+            font-size: 20px;
+            text-align: justify
+        }
+
+        #myBtnUp {
+            display: none;
+        }
+
+        #more {
+            display: none;
+        }
+
+        /*        vision*/
+        .container-fluid {
+            /*            margin: 50px;*/
+        }
+
+        .customdiv {
+            margin: 10px;
+            text-align: center;
+            min-height: 300px;
+            font-size: 18px;
+            float: none;
+        }
+
+        .customdiv p {
+            font-size: 20px;
+            padding: 30px;
+            text-align: justify;
+        }
+
+        .no-padding1 {
+            padding-right: 0px !important;
+        }
+
+        .no-padding2 {
+            padding-left: 0px !important;
+        }
+
+        @media screen and (max-width:992px) {
+            .customdiv {
+                margin-left: 70px;
+                margin-right: 70px;
+            }
+
+            .no-padding1 {
+                padding-right: 15px !important;
+            }
+
+            .no-padding2 {
+                padding-left: 15px !important;
+            }
+        }
+
+        @media screen and (max-width:766px) {
+            .customdiv {
+                margin: 10px;
+            }
+        }
+
+        .right .carousel {
+            margin: 2% 0%;
+            padding: 0px 0px 10px 0px;
+        }
+
+        .carousel-item img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .carousel .carousel-indicators {
+            margin-bottom: 1%;
+        }
+
+        @media(max-width:990px) {
+
+            .right .carousel {
+                margin-left: 8%;
+            }
+        }
+
+        /*        chairman*/
+
+        .customdiv_chairman {
+            background: linear-gradient(to bottom, #2c3e50, #f9746c);
+            color: white;
+            margin: 50px auto;
+            padding: 30px;
+            width: 80%;
+            background-color: silver;
+            text-align: center;
+            min-height: 350px;
+            font-size: 18px;
+        }
+
+        .chairman_heading {
+            margin-bottom: 30px;
+        }
+
+        .message {
+            margin-left: 70px;
+            width: 50%;
+            text-align: justify;
+            float: left;
+            font-family: sans-serif;
+
+        }
+
+        .MDpic {
+            margin-right: 70px;
+            float: right;
+            width: 300px;
+        }
+
+        @media screen and (max-width:1050px) {
+            .message {
+                margin-left: 30px;
+                width: inherit;
+                float: none;
+            }
+
+            .MDpic {
+                float: none;
+                margin-left: 25px;
+            }
+        }
+
+    </style>
+
+    <script>
+        onload = start;
+
+        function start() {
+            var i = 0;
+
+            function Move() {
+                i = (i % 5) + 1;
+                //5 is the Number of image in slider
+                document.getElementById('id' + i).checked = true;
+            }
+            setInterval(Move, 3000);
+            //change image in 3 sec
+        }
+
+        function myFunction() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
+            var btnDown = document.getElementById("myBtnDown");
+            var btnUp = document.getElementById("myBtnUp");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnDown.style.display = "block";
+                btnUp.style.display = "none";
+                moreText.style.display = "none";
+
+            } else {
+                dots.style.display = "none";
+                btnDown.style.display = "none";
+                btnUp.style.display = "block";
+                moreText.style.display = "inline";
+            }
+        }
+
+        function mouseover(controlID) {
+            document.getElementById(controlID).style.transform = "scale(1.05)";
+            document.getElementById(controlID).style.transition = ".4s"
+        }
+
+        function mouseout(controlID) {
+            document.getElementById(controlID).style.transform = "scale(1)";
+            document.getElementById(controlID).style.transition = ".4s"
+        }
+
+    </script>
+
+
+    <script>
+
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<!--      Nav-Bar Code-->
+     <nav class="navbar navbar-expand-lg navbar-light bg-info navbar-dark">
+  <a class="navbar-brand" href="food.html">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">About Us <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="food.html">Write A Review</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Rewards
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#top6">Top 6 Restaurant</a>
+          <a class="dropdown-item" href="#">Coupons</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Religious Food</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+    
+    <div class="imgcontainer">
+        <input type="radio" id="id1" name="images" checked>
+        <input type="radio" id="id2" name="images">
+        <input type="radio" id="id3" name="images">
+
+
+        <div class="img_slide" id="one">
+            <img src="../Image/food5.jpg" alt="">
+            <label for="id5" class="prev">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </label>
+            <label for="id2" class="next">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i></label>
+        </div>
+
+        <div class="img_slide" id="two">
+            <img src="../Image/food3.jpg" alt="">
+            <label for="id1" class="prev">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </label>
+            <label for="id3" class="next">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i></label>
+        </div>
+
+        <div class="img_slide" id="three">
+            <img src="../Image/food4.jpeg" alt="">
+            <label for="id2" class="prev">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </label>
+            <label for="id4" class="next">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i></label>
+        </div>
+
+       
+
+        <div class="nav-slider">
+            <label for="id1" class="dots" id="dot-1"></label>
+            <label for="id2" class="dots" id="dot-2"></label>
+            <label for="id3" class="dots" id="dot-3"></label>
+        </div>
+    </div>
+
+    <div class="introduction">
+        <div class="intro_heading">
+            <h2>About Us</h2>
+        </div>
+        <div class="intro_content">
+            <p>The main objective of “Restaurant Reel” is that it provides the visitor or user the reviewed Restaurant. In this website the user can look the rating of Top Restaurant Present in Mathura. Since, Mathura is a birth Place of Lord Krishna, and the visitor must get the top rated Restaurant for having the stuff. This makes the selection process easier for people who do not want to do all the research themselves and would rather trust an authority source to make their decision. This is human nature that applies to almost all decisions that we make where we want to conserve time and energy and not have to spend too much of either of these things that can be done in a more time-efficient manner.</p>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="customdiv" style="font-size: 35px; font-weight: 600; min-height: 50px; margin-bottom: -5px;">Our Vision</div>
+            </div>
+            <div class=" col-sm-12 no-padding1">
+                <div class="customdiv">
+                    <p>“Restaurant Reel” is the way of giving/providing information related to the best rated Restaurant in Mathura, because, Online review sites have transformed the way we do business and the way your customers make decisions. Additionally, review sites help your potential customers weed out their choices. Reviews help them decide if they’re going to stop into your restaurant or the competition’s. Public opinion has taken over the Internet, and if you aren’t currently perusing review sites, it’s time to find out what your customers think.<br> <span id="dots">...</span> <br><span id="more">This is why this websites are held in such high regard. It makes the selection process easier for people who do not want to do all the research themselves and would rather trust an authority source to make their decision. This is human nature that applies to almost all decisions that we make where we want to conserve time and energy and not have to spend too much of either of these things that can be done in a more time-efficient manner.</span>
+                    </p>
+
+                    <div class="sign" style="text-align: center">
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true" style="font-size: 40px" onclick="myFunction()" onmouseover="mouseover('myBtnDown')" onmouseout="mouseout('myBtnDown')" id="myBtnDown"></i>
+                        <i class="fa fa-chevron-circle-up" aria-hidden="true" style="font-size: 40px" onclick="myFunction()" onmouseover="mouseover('myBtnUp')" onmouseout="mouseout('myBtnUp')" id="myBtnUp"></i>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="customdiv_chairman" id="customdiv_chairman" onmouseover="mouseover('customdiv_chairman')" onmouseout="mouseout('customdiv_chairman')">
+                    <h2 class="chairman_heading">Today's Message</h2>
+                    <p class="message">
+                       Owners of dogs will have noticed that, if you provide them with food and water and shelter and affection, they will think you are god. Whereas owners of cats are compelled to realize that, if you provide them with food and water and shelter and affection, they draw the conclusion that they are gods.
+                        <br>
+                        <br> <span style="font-size: 25px; font-weight: 600">Kartikeya Mishra</span>
+                        <br> <span style="font-size: 15px">Web-Site Developer</span>
+                    </p>
+
+                    <img src="../Image/kartik1.jpg" class="MDpic">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
